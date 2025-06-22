@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendation System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .movie-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .movie-item {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            gap: 20px;
+        }
+
+        .movie-item img {
+            border-radius: 8px;
+            width: 150px;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .movie-details {
+            flex: 1;
+        }
+
+        .movie-details p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .movie-details p span {
+            font-weight: bold;
+            color: #222;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Recommendation System</h1>
+
+        <form method="POST" action="/">
+            <input type="text" name="movie_name" placeholder="Enter movie name" required>
+            <input type="submit" value="Get Recommendations">
+        </form>
+
+        {% if recommendations %}
+            <h2 style="text-align: center;">Recommended Movies:</h2>
+            <div class="movie-list">
+                {% for movie in recommendations %}
+                    <div class="movie-item">
+                        <img src="{{ movie['img'] }}" alt="Movie Poster"
+     onerror="this.onerror=null;this.src='https://via.placeholder.com/150x220?text=No+Image';">
+                        <div class="movie-details">
+                            <p><span>Title:</span> {{ movie['Movie Title'] }}</p>
+                            <p><span>Rating:</span> {{ movie['Ratinng'] }}</p>
+                            <p><span>Genre:</span> {{ movie['genre'] }}</p>
+                            <p><span>Cast:</span> {{ movie['act'] }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
